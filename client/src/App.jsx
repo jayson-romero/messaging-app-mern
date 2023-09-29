@@ -3,6 +3,8 @@ import "./App.css"
 import { useState, useEffect } from "react"
 import Pusher from "pusher-js"
 import axios from "axios"
+// import dotenv from "dotenv"
+// dotenv.config()
 
 import Sidebar from "./components/Sidebar/Sidebar"
 import Chat from "./components/Chat/Chat"
@@ -17,7 +19,7 @@ function App() {
 	}, [])
 
 	useEffect(() => {
-		const pusher = new Pusher("69d9d7ed8ab99fbcc7d6", {
+		const pusher = new Pusher(import.meta.env.VITE_PUSHER_KEY, {
 			cluster: "ap1",
 		})
 		const channel = pusher.subscribe("messages")

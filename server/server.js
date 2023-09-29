@@ -12,9 +12,9 @@ dotenv.config()
 const port = process.env.PORT || 9000
 const app = express()
 const pusher = new Pusher({
-	appId: "1679211",
-	key: "69d9d7ed8ab99fbcc7d6",
-	secret: "14efed9bb358111916a8",
+	appId: process.env.PUSHER_APPID,
+	key: process.env.PUSHER_KEY,
+	secret: process.env.PUSHER_SECRET,
 	cluster: "ap1",
 	useTLS: true,
 })
