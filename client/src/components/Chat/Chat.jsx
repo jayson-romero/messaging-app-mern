@@ -9,15 +9,18 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
+import { useStateValue } from "../Login/Context/StateProvider"
+
 const Chat = ({ messages }) => {
 	const [seed, setSeed] = useState("")
 	const [input, setInput] = useState("")
+	const [{ user }, dispatch] = useStateValue()
 
 	const sendMessage = async (e) => {
 		e.preventDefault()
 		await axios.post("http://localhost:9000/messages/new", {
 			message: input,
-			name: "Jayson Romero",
+			name: user.displayName,
 			timestamp: new Date().toUTCString(),
 			received: true,
 		})
@@ -32,10 +35,10 @@ const Chat = ({ messages }) => {
 		<div className="chat">
 			{/* HEADER  */}
 			<div className="chat__header">
-				<Avatar src={`https://avatars.dicebear.com/api/human/b${seed}.svg`} />
+				<Avatar src={`https://api.dicebear.com/7.x/open-peeps/svg?seed=Bear`} />
 				<div className="chat__headerInfo">
-					<h3>Room Name</h3>
-					<p>Last seen at...</p>
+					<h3>Dev Help</h3>
+					<p>Last seen at {messages[messages.length - 1]?.timestamp}</p>
 				</div>
 				<div className="chat__headerRight">
 					<IconButton>
@@ -54,8 +57,10 @@ const Chat = ({ messages }) => {
 			<div className="chat__body">
 				{messages.map((message) => (
 					<p
-						key={message.id}
-						className={`chat__message ${message.received && "chat__receiver"}`}
+						key={message._id}
+						className={`chat__message ${
+							message.name === user.displayName && "chat__receiver"
+						}`}
 					>
 						<span className="chat__name">{message.name}</span>
 						{message.message}

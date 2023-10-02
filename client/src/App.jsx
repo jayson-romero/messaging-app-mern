@@ -6,11 +6,15 @@ import axios from "axios"
 // import dotenv from "dotenv"
 // dotenv.config()
 
+import { useStateValue } from "./components/Login/Context/StateProvider"
+
 import Sidebar from "./components/Sidebar/Sidebar"
 import Chat from "./components/Chat/Chat"
+import Login from "./components/Login/Login"
 
 function App() {
 	const [messages, setMessages] = useState([])
+	const [{ user }, dispatch] = useStateValue()
 
 	useEffect(() => {
 		axios.get("http://localhost:9000/messages/sync").then((res) => {
@@ -32,13 +36,16 @@ function App() {
 		}
 	}, [messages])
 
-	console.log(messages)
 	return (
 		<div className="app">
-			<div className="app__body">
-				<Sidebar />
-				<Chat messages={messages} />
-			</div>
+			{!user ? (
+				<Login />
+			) : (
+				<div className="app__body">
+					<Sidebar messages={messages} />
+					<Chat messages={messages} />
+				</div>
+			)}
 		</div>
 	)
 }

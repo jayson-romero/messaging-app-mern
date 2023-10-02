@@ -11,12 +11,15 @@ import { Avatar, IconButton } from "@mui/material"
 // COMPONENT
 import SidebarChat from "../SidebarChat/SidebarChat"
 
-const Sidebar = () => {
+import { useStateValue } from "../Login/Context/StateProvider"
+
+const Sidebar = ({ messages }) => {
+	const [{ user }, dispatch] = useStateValue()
 	return (
 		<div className="sidebar">
 			{/* PROFILE SECTION  */}
 			<div className="sidebar__header">
-				<Avatar src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+				<Avatar src={user?.photoURL} />
 				<div className="sidebar__headerRight">
 					<IconButton>
 						<DonutLargeIcon />
@@ -39,9 +42,7 @@ const Sidebar = () => {
 			</div>
 
 			<div className="sidebar__chats">
-				<SidebarChat />
-				<SidebarChat />
-				<SidebarChat />
+				<SidebarChat messages={messages} />
 			</div>
 		</div>
 	)
