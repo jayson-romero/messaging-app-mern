@@ -17,9 +17,11 @@ function App() {
 	const [{ user }, dispatch] = useStateValue()
 
 	useEffect(() => {
-		axios.get("http://localhost:9000/messages/sync").then((res) => {
-			setMessages(res.data)
-		})
+		axios
+			.get("https://messaging-app-server-wow9.onrender.com/messages/sync")
+			.then((res) => {
+				setMessages(res.data)
+			})
 	}, [])
 
 	useEffect(() => {

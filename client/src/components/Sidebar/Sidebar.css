@@ -11,6 +11,16 @@
 	padding: 20px;
 	border-right: 1px solid lightgray;
 }
+
+.siderbar__header_info {
+	margin-left: 20px;
+}
+.siderbar__header_info h2 {
+	font-size: 20px;
+}
+.siderbar__header_info p {
+	font-size: 14px;
+}
 .sidebar__headerRight {
 	display: flex;
 	align-items: center;

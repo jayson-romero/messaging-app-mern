@@ -18,12 +18,15 @@ const Chat = ({ messages }) => {
 
 	const sendMessage = async (e) => {
 		e.preventDefault()
-		await axios.post("http://localhost:9000/messages/new", {
-			message: input,
-			name: user.displayName,
-			timestamp: new Date().toUTCString(),
-			received: true,
-		})
+		await axios.post(
+			"https://messaging-app-server-wow9.onrender.com/messages/new",
+			{
+				message: input,
+				name: user.displayName,
+				timestamp: new Date().toUTCString(),
+				received: true,
+			}
+		)
 		setInput("")
 	}
 

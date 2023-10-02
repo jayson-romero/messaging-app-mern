@@ -20,6 +20,10 @@ const Sidebar = ({ messages }) => {
 			{/* PROFILE SECTION  */}
 			<div className="sidebar__header">
 				<Avatar src={user?.photoURL} />
+				<div className="siderbar__header_info">
+					<h2>{user?.displayName} </h2>
+					<p>{user?.email} </p>
+				</div>
 				<div className="sidebar__headerRight">
 					<IconButton>
 						<DonutLargeIcon />
